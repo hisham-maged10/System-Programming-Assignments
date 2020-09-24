@@ -1,0 +1,24 @@
+         START   1000
+         LDCH    LETTER
+         RMO     A,S
+         LDX     ZERO
+         LDT     ONE     
+LOOP     LDCH    STRING,X
+         COMP    BLANK
+         JEQ     EN
+         COMPR   A,S
+         JEQ     FOUND
+         ADDR    T,X     
+         J       LOOP
+FOUND    LDA     #STRING
+         ADDR    X,A
+         J       EXIT
+EN       LDA     ADDRESS
+EXIT     J       *
+ONE      WORD    1
+LETTER   BYTE    C'!'
+STRING   BYTE    C'Hello, World!'
+BLANK    BYTE    C''
+ADDRESS  BYTE    X'FFFFFF'
+ZERO     WORD    0
+         END

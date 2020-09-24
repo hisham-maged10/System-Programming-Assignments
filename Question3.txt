@@ -1,0 +1,31 @@
+         START   1000
+ILOOP    JSUB    INLOOP
+         COMP    FOUR     
+         JEQ     EXIT
+         COMP    ZERO
+         JEQ     ILOOP
+         JSUB    UPPER
+         JSUB    OUTLOOP
+         J       ILOOP
+EXIT     J       *
+INLOOP   TD      DEVF3
+         JEQ     INLOOP
+         LDA     ZERO
+         RD      DEVF3
+         RSUB    
+OUTLOOP  TD      OUTDEV
+         JEQ     OUTLOOP
+         WD      OUTDEV
+         RSUB  
+UPPER    COMP    #97
+         JLT     BIG
+         COMP    #122
+         JGT     BIG 
+         SUB     #32
+BIG      RSUB  
+ZERO     WORD    0
+FOUR     WORD    4
+ONE      WORD    1
+DEVF3    BYTE    X'F3'
+OUTDEV   BYTE    X'06'
+         END
